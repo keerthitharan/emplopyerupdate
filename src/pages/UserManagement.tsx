@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Users, Plus, Edit, Trash2, Search, Filter, Mail, Phone, Calendar } from 'lucide-react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 interface User {
   id: number;
@@ -167,11 +165,7 @@ const UserManagement: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
-      
-      <main className="flex-grow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Page Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">User Management</h1>
@@ -322,10 +316,7 @@ const UserManagement: React.FC = () => {
               </table>
             </div>
           </div>
-        </div>
-      </main>
-
-      <Footer />
+    </div>
 
       {/* Modal */}
       {showModal && (
@@ -455,7 +446,6 @@ const UserManagement: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
   );
 };
 

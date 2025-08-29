@@ -13,28 +13,47 @@ import EmployerDashboard from './pages/EmployerDashboard';
 import UserManagement from './pages/UserManagement';
 import CompanyManagement from './pages/CompanyManagement';
 import CandidateManagement from './pages/CandidateManagement';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        <Header />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/staffing-expertises" element={<StaffingExpertises />} />
-            <Route path="/employee" element={<Employee />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/employer" element={<Employer />} />
-            <Route path="/employer-login" element={<EmployerLogin />} />
-            <Route path="/employer-dashboard" element={<EmployerDashboard />} />
-            <Route path="/employer-dashboard/users" element={<UserManagement />} />
-            <Route path="/employer-dashboard/companies" element={<CompanyManagement />} />
-            <Route path="/employer-dashboard/candidates" element={<CandidateManagement />} />
-          </Routes>
-        </main>
-        <Footer />
+        <Routes>
+          <Route path="/employer-login" element={<EmployerLogin />} />
+          <Route path="/employer-dashboard/*" element={
+            <ProtectedRoute>
+              <div className="min-h-screen bg-gray-50 flex flex-col">
+                <Header />
+                <main className="flex-grow">
+                  <Routes>
+                    <Route path="/" element={<EmployerDashboard />} />
+                    <Route path="/users" element={<UserManagement />} />
+                    <Route path="/companies" element={<CompanyManagement />} />
+                    <Route path="/candidates" element={<CandidateManagement />} />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={
+            <div className="min-h-screen bg-gray-50 flex flex-col">
+              <Header />
+              <main className="flex-grow">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/staffing-expertises" element={<StaffingExpertises />} />
+                  <Route path="/employee" element={<Employee />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/employer" element={<Employer />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          } />
+        </Routes>
       </div>
     </Router>
   );
